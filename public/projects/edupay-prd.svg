@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#F8FAFC"/>
+  <rect x="44" y="36" width="712" height="464" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="44" y="36" width="712" height="44" rx="12" fill="#0D1836"/>
+  <text x="72" y="63" font-family="sans-serif" font-weight="bold" font-size="14" fill="#FFFFFF">EduFlex Tuition Installment Rollout · Product Case Study</text>
+  <!-- Top Outcome Metrics -->
+  <rect x="72" y="104" width="206" height="84" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <text x="90" y="130" font-family="sans-serif" font-size="11" fill="#166534">Parent Checkout Completion</text>
+  <text x="90" y="168" font-family="sans-serif" font-weight="bold" font-size="24" fill="#27A810">+34% Lift</text>
+  <rect x="296" y="104" width="206" height="84" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="314" y="130" font-family="sans-serif" font-size="11" fill="#64748B">Bursary Reconciliation Time</text>
+  <text x="314" y="168" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0D1836">4 days ➔ 2 hrs</text>
+  <rect x="520" y="104" width="208" height="84" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="538" y="130" font-family="sans-serif" font-size="11" fill="#64748B">Pilot Schools Onboarded</text>
+  <text x="538" y="168" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0D1836">12 Schools</text>
+  <!-- Roadmap / Funnel Breakdown -->
+  <rect x="72" y="208" width="320" height="252" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="94" y="238" font-family="sans-serif" font-weight="bold" font-size="13" fill="#0D1836">Discovery &amp; Delivery Milestones</text>
+  <rect x="94" y="256" width="276" height="44" rx="8" fill="#F8FAFC"/>
+  <text x="110" y="276" font-family="sans-serif" font-weight="bold" font-size="11" fill="#0D1836">1. User Interviews (28 Parents &amp; 6 Bursars)</text>
+  <text x="110" y="292" font-family="sans-serif" font-size="10" fill="#64748B">Identified failed bank transfer receipts as #1 drop-off</text>
+  <rect x="94" y="310" width="276" height="44" rx="8" fill="#F8FAFC"/>
+  <text x="110" y="330" font-family="sans-serif" font-weight="bold" font-size="11" fill="#0D1836">2. Virtual Account Split-Payment MVP</text>
+  <text x="110" y="346" font-family="sans-serif" font-size="10" fill="#64748B">Scoped PRD with 2 engineers &amp; 1 designer in 3 sprints</text>
+  <rect x="94" y="364" width="276" height="44" rx="8" fill="#F0FDF4"/>
+  <text x="110" y="384" font-family="sans-serif" font-weight="bold" font-size="11" fill="#15803D">3. Term 1 Launch &amp; WhatsApp Receipt Bot</text>
+  <text x="110" y="400" font-family="sans-serif" font-size="10" fill="#166534">Processed 1,800+ tuition installments with zero lost receipts</text>
+  <!-- Right Funnel Chart -->
+  <rect x="410" y="208" width="318" height="252" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="432" y="238" font-family="sans-serif" font-weight="bold" font-size="13" fill="#0D1836">Checkout Conversion Funnel</text>
+  <text x="432" y="274" font-family="sans-serif" font-size="11" fill="#475569">Invoice Opened (100%)</text>
+  <rect x="432" y="284" width="270" height="16" rx="4" fill="#0D1836"/>
+  <text x="432" y="328" font-family="sans-serif" font-size="11" fill="#475569">Installment Plan Selected (82%)</text>
+  <rect x="432" y="338" width="221" height="16" rx="4" fill="#27A810" fill-opacity="0.75"/>
+  <text x="432" y="382" font-family="sans-serif" font-size="11" fill="#475569">Payment Confirmed &amp; Receipt Sent (76%)</text>
+  <rect x="432" y="392" width="205" height="16" rx="4" fill="#27A810"/>
+</svg>

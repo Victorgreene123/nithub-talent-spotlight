@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#F0FDF4"/>
+  <rect x="48" y="38" width="704" height="462" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="48" y="38" width="704" height="44" rx="12" fill="#0D1836"/>
+  <text x="76" y="65" font-family="sans-serif" font-weight="bold" font-size="14" fill="#FFFFFF">CassavaLeaf Field Diagnostic</text>
+  <!-- Left Leaf Sample Box -->
+  <rect x="76" y="108" width="290" height="290" rx="12" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="2"/>
+  <path d="M 221 160 C 265 160 295 200 295 250 C 295 305 250 345 221 355 C 192 345 147 305 147 250 C 147 200 177 160 221 160 Z" fill="#27A810" fill-opacity="0.85"/>
+  <path d="M 221 160 L 221 355" stroke="#DCFCE7" stroke-width="3"/>
+  <circle cx="248" cy="235" r="14" fill="#EAB308" fill-opacity="0.85"/>
+  <circle cx="195" cy="272" r="10" fill="#EAB308" fill-opacity="0.85"/>
+  <rect x="176" y="210" width="96" height="84" rx="6" fill="none" stroke="#0D1836" stroke-width="2" stroke-dasharray="5,5"/>
+  <!-- Right Classification Results -->
+  <text x="398" y="132" font-family="sans-serif" font-weight="bold" font-size="16" fill="#0D1836">Diagnosis Result</text>
+  <rect x="398" y="150" width="320" height="88" rx="10" fill="#FEFCE8" stroke="#FEF08A"/>
+  <text x="418" y="178" font-family="sans-serif" font-weight="bold" font-size="15" fill="#0D1836">Cassava Mosaic Disease (CMD)</text>
+  <text x="418" y="202" font-family="sans-serif" font-weight="bold" font-size="13" fill="#27A810">Confidence: 94.2%</text>
+  <text x="418" y="222" font-family="sans-serif" font-size="11" fill="#64748B">Model: MobileNetV3-Small · 140ms inference</text>
+  <text x="398" y="274" font-family="sans-serif" font-weight="bold" font-size="13" fill="#0D1836">Recommended Extension Action</text>
+  <rect x="398" y="288" width="320" height="110" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="416" y="316" font-family="sans-serif" font-size="12" fill="#334155">1. Isolate affected stem cuttings before replanting.</text>
+  <text x="416" y="344" font-family="sans-serif" font-size="12" fill="#334155">2. Recommend CMD-resistant variety TME 419.</text>
+  <text x="416" y="372" font-family="sans-serif" font-size="12" fill="#27A810">3. Saved to Ogun State Extension Log.</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#F1F5F9"/>
+  <!-- Browser Window -->
+  <rect x="40" y="36" width="720" height="464" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="40" y="36" width="720" height="40" rx="12" fill="#0D1836"/>
+  <circle cx="66" cy="56" r="5" fill="#475569"/>
+  <circle cx="84" cy="56" r="5" fill="#475569"/>
+  <circle cx="102" cy="56" r="5" fill="#475569"/>
+  <rect x="260" y="46" width="280" height="20" rx="4" fill="#1E293B"/>
+  <text x="400" y="60" font-family="sans-serif" font-size="11" fill="#94A3B8" text-anchor="middle">medshelf.ng/inventory</text>
+  <!-- Sidebar -->
+  <rect x="41" y="76" width="150" height="423" fill="#F8FAFC"/>
+  <rect x="60" y="100" width="90" height="14" rx="4" fill="#0D1836"/>
+  <rect x="60" y="136" width="112" height="28" rx="6" fill="#27A810" fill-opacity="0.12"/>
+  <rect x="70" y="146" width="72" height="8" rx="3" fill="#27A810"/>
+  <rect x="70" y="180" width="80" height="8" rx="3" fill="#94A3B8"/>
+  <rect x="70" y="208" width="64" height="8" rx="3" fill="#94A3B8"/>
+  <rect x="70" y="236" width="88" height="8" rx="3" fill="#94A3B8"/>
+  <!-- Main Dashboard -->
+  <text x="220" y="112" font-family="sans-serif" font-weight="bold" font-size="18" fill="#0D1836">Stock &amp; Expiry Overview</text>
+  <rect x="630" y="94" width="104" height="28" rx="6" fill="#27A810"/>
+  <text x="682" y="112" font-family="sans-serif" font-weight="bold" font-size="11" fill="#FFFFFF" text-anchor="middle">+ Log Batch</text>
+  <!-- Metric Cards -->
+  <rect x="220" y="134" width="160" height="78" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="236" y="156" font-family="sans-serif" font-size="11" fill="#64748B">Active Batches</text>
+  <text x="236" y="190" font-family="sans-serif" font-weight="bold" font-size="24" fill="#0D1836">1,428</text>
+  <rect x="396" y="134" width="160" height="78" rx="8" fill="#FEF2F2" stroke="#FECACA"/>
+  <text x="412" y="156" font-family="sans-serif" font-size="11" fill="#B91C1C">Expiring in 30 Days</text>
+  <text x="412" y="190" font-family="sans-serif" font-weight="bold" font-size="24" fill="#DC2626">14 Batches</text>
+  <rect x="572" y="134" width="162" height="78" rx="8" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <text x="588" y="156" font-family="sans-serif" font-size="11" fill="#15803D">Stock Health</text>
+  <text x="588" y="190" font-family="sans-serif" font-weight="bold" font-size="24" fill="#27A810">98.4%</text>
+  <!-- Table -->
+  <rect x="220" y="232" width="514" height="220" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="220" y="232" width="514" height="36" rx="8" fill="#F8FAFC"/>
+  <text x="238" y="254" font-family="sans-serif" font-weight="bold" font-size="11" fill="#475569">MEDICATION</text>
+  <text x="430" y="254" font-family="sans-serif" font-weight="bold" font-size="11" fill="#475569">BATCH</text>
+  <text x="530" y="254" font-family="sans-serif" font-weight="bold" font-size="11" fill="#475569">QTY</text>
+  <text x="620" y="254" font-family="sans-serif" font-weight="bold" font-size="11" fill="#475569">STATUS</text>
+  <!-- Row 1 -->
+  <text x="238" y="294" font-family="sans-serif" font-size="12" fill="#0D1836">Amoxicillin 500mg Caps</text>
+  <text x="430" y="294" font-family="sans-serif" font-size="12" fill="#64748B">BN-8841</text>
+  <text x="530" y="294" font-family="sans-serif" font-size="12" fill="#0D1836">420 packs</text>
+  <rect x="620" y="280" width="76" height="20" rx="10" fill="#DCFCE7"/>
+  <text x="658" y="294" font-family="sans-serif" font-weight="bold" font-size="10" fill="#15803D" text-anchor="middle">Healthy</text>
+  <!-- Row 2 -->
+  <line x1="220" y1="314" x2="734" y2="314" stroke="#F1F5F9"/>
+  <text x="238" y="340" font-family="sans-serif" font-size="12" fill="#0D1836">Artemether + Lumefantrine</text>
+  <text x="430" y="340" font-family="sans-serif" font-size="12" fill="#64748B">BN-3029</text>
+  <text x="530" y="340" font-family="sans-serif" font-size="12" fill="#0D1836">38 packs</text>
+  <rect x="620" y="326" width="88" height="20" rx="10" fill="#FEF3C7"/>
+  <text x="664" y="340" font-family="sans-serif" font-weight="bold" font-size="10" fill="#B45309" text-anchor="middle">21 days left</text>
+  <!-- Row 3 -->
+  <line x1="220" y1="360" x2="734" y2="360" stroke="#F1F5F9"/>
+  <text x="238" y="386" font-family="sans-serif" font-size="12" fill="#0D1836">Metformin HCl 850mg</text>
+  <text x="430" y="386" font-family="sans-serif" font-size="12" fill="#64748B">BN-9104</text>
+  <text x="530" y="386" font-family="sans-serif" font-size="12" fill="#0D1836">290 packs</text>
+  <rect x="620" y="372" width="76" height="20" rx="10" fill="#DCFCE7"/>
+  <text x="658" y="386" font-family="sans-serif" font-weight="bold" font-size="10" fill="#15803D" text-anchor="middle">Healthy</text>
+</svg>

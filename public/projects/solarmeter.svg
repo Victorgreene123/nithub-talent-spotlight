@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#F1F5F9"/>
+  <rect x="44" y="36" width="712" height="464" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="44" y="36" width="712" height="44" rx="12" fill="#0D1836"/>
+  <text x="72" y="63" font-family="sans-serif" font-weight="bold" font-size="14" fill="#FFFFFF">SolarSense ESP32 Smart Inverter Monitor</text>
+  <rect x="614" y="48" width="118" height="22" rx="11" fill="#27A810"/>
+  <text x="673" y="63" font-family="sans-serif" font-weight="bold" font-size="10" fill="#FFFFFF" text-anchor="middle">PCB Rev 2.1 · Active</text>
+  <!-- Hardware Board Schematic / Enclosure Preview on Left -->
+  <rect x="72" y="106" width="286" height="352" rx="10" fill="#0D1836"/>
+  <rect x="92" y="126" width="246" height="170" rx="8" fill="#15803D" stroke="#27A810" stroke-width="2"/>
+  <!-- Chip & Pins -->
+  <rect x="166" y="168" width="96" height="76" rx="4" fill="#1E293B" stroke="#94A3B8" stroke-width="1.5"/>
+  <text x="214" y="204" font-family="monospace" font-weight="bold" font-size="11" fill="#FFFFFF" text-anchor="middle">ESP32-S3</text>
+  <text x="214" y="220" font-family="monospace" font-size="9" fill="#94A3B8" text-anchor="middle">INA226 + GSM</text>
+  <!-- Copper Traces -->
+  <line x1="115" y1="186" x2="166" y2="186" stroke="#FACC15" stroke-width="2"/>
+  <line x1="115" y1="206" x2="166" y2="206" stroke="#FACC15" stroke-width="2"/>
+  <line x1="115" y1="226" x2="166" y2="226" stroke="#FACC15" stroke-width="2"/>
+  <line x1="262" y1="196" x2="312" y2="196" stroke="#FACC15" stroke-width="2"/>
+  <line x1="262" y1="216" x2="312" y2="216" stroke="#FACC15" stroke-width="2"/>
+  <text x="92" y="330" font-family="sans-serif" font-weight="bold" font-size="13" fill="#FFFFFF">Hardware Specs</text>
+  <text x="92" y="354" font-family="sans-serif" font-size="11" fill="#CBD5E1">• Custom 2-Layer KiCad PCB</text>
+  <text x="92" y="376" font-family="sans-serif" font-size="11" fill="#CBD5E1">• CT Clamp + Shunt Sensing</text>
+  <text x="92" y="398" font-family="sans-serif" font-size="11" fill="#CBD5E1">• SIM800L SMS Fault Alerts</text>
+  <text x="92" y="420" font-family="sans-serif" font-size="11" fill="#27A810">• 3D-Printed DIN Rail Case</text>
+  <!-- Right Side Telemetry & Load Readout -->
+  <rect x="382" y="106" width="162" height="94" rx="10" fill="#F0FDF4" stroke="#BBF7D0"/>
+  <text x="400" y="132" font-family="sans-serif" font-size="11" fill="#166534">Battery Bank</text>
+  <text x="400" y="170" font-family="sans-serif" font-weight="bold" font-size="26" fill="#27A810">51.4 V (88%)</text>
+  <rect x="562" y="106" width="166" height="94" rx="10" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="580" y="132" font-family="sans-serif" font-size="11" fill="#64748B">PV Solar Input</text>
+  <text x="580" y="170" font-family="sans-serif" font-weight="bold" font-size="26" fill="#0D1836">2.45 kW</text>
+  <rect x="382" y="218" width="346" height="240" rx="10" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="404" y="248" font-family="sans-serif" font-weight="bold" font-size="13" fill="#0D1836">24h Load &amp; Charge Curve (MQTT)</text>
+  <polyline points="404,390 450,375 495,330 540,295 585,280 630,310 675,350 706,365" fill="none" stroke="#27A810" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="404" y1="410" x2="706" y2="410" stroke="#E2E8F0"/>
+  <text x="404" y="432" font-family="sans-serif" font-size="11" fill="#64748B">Auto-shedding relay triggered at 25% SOC threshold</text>
+</svg>
