@@ -58,8 +58,8 @@ function ConfettiCanvas() {
         i % 3 === 0
           ? width * 0.5
           : i % 3 === 1
-          ? width * 0.35
-          : width * 0.65;
+            ? width * 0.35
+            : width * 0.65;
       const originY = height * 0.42;
 
       const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.9;
@@ -528,3 +528,6 @@ export function IntroductionsTab({
     </div>
   );
 }
+
+
+
