@@ -37,36 +37,37 @@ export function ShortlistedCandidateCard({
   const isAvailableNow = person.availability_status === "available_now";
 
   return (
-    <article className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 transition-shadow hover:shadow-xs">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-4 min-w-0">
+    <article className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 transition-shadow hover:shadow-xs">
+      {/* Row 1: Avatar + Name/Meta on Left, Remove Button on Right */}
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
           {person.avatar_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={person.avatar_url}
               alt={person.full_name}
-              className="w-12 h-12 rounded-full object-cover border border-slate-200 shrink-0"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border border-slate-200 shrink-0"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-navy text-white font-cabinet font-bold text-base flex items-center justify-center shrink-0 ring-2 ring-brand-green/25">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-navy text-white font-cabinet font-bold text-sm sm:text-base flex items-center justify-center shrink-0 ring-2 ring-brand-green/25">
               {getInitials(person.full_name)}
             </div>
           )}
 
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
               <Link
                 href={`/talent/${person.id}`}
-                className="font-cabinet font-bold text-lg text-navy hover:text-brand-green transition-colors"
+                className="font-cabinet font-bold text-base sm:text-lg text-navy hover:text-brand-green transition-colors truncate"
               >
                 {person.full_name}
               </Link>
-              <span className="px-2 py-0.5 rounded bg-brand-green/10 text-brand-green font-cabin text-[11px] font-semibold">
-                {TRACK_LABELS[person.track]}
+              <span className="font-cabin text-xs font-semibold text-brand-green">
+                · {TRACK_LABELS[person.track]}
               </span>
             </div>
 
-            <p className="mt-0.5 font-cabin text-xs text-slate-500">
+            <p className="mt-0.5 font-cabin text-xs text-slate-500 truncate">
               <span>Cohort {person.cohort_year}</span>
               <span> · </span>
               <span
@@ -77,46 +78,42 @@ export function ShortlistedCandidateCard({
                 {AVAILABILITY_LABELS[person.availability_status]}
               </span>
             </p>
-
-            {/* Reminder of their featured project */}
-            <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80">
-              <p className="font-cabin text-xs text-slate-500">
-                Featured project:{" "}
-                <Link
-                  href={`/talent/${person.id}`}
-                  className="font-semibold text-navy hover:text-brand-green transition-colors"
-                >
-                  {person.top_project.title}
-                </Link>
-              </p>
-              <p className="mt-1 font-mulish text-xs text-slate-600 line-clamp-1">
-                {person.top_project.tagline}
-              </p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {person.top_project.tech_stack.slice(0, 4).map((tool) => (
-                  <span
-                    key={tool}
-                    className="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-600 font-cabin text-[11px]"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
 
         <button
           type="button"
           onClick={() => onRemove(person.id)}
+          aria-label={`Remove ${person.full_name} from shortlist`}
           className="font-cabin text-xs font-medium text-slate-400 hover:text-red-600 px-2.5 py-1.5 rounded-lg hover:bg-red-50 transition-colors cursor-pointer shrink-0"
         >
           Remove
         </button>
       </div>
 
-      {/* Optional 1-line note for this specific candidate */}
-      <div className="mt-4 pt-3.5 border-t border-slate-100">
+      {/* Row 2: Full-Width Featured Project Reminder Box */}
+      <div className="mt-3.5 p-3 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <p className="font-cabin text-xs text-slate-500">
+            Featured project:{" "}
+            <Link
+              href={`/talent/${person.id}`}
+              className="font-semibold text-navy hover:text-brand-green transition-colors"
+            >
+              {person.top_project.title}
+            </Link>
+          </p>
+          <span className="font-cabin text-[11px] text-slate-400">
+            {person.top_project.tech_stack.slice(0, 3).join(", ")}
+          </span>
+        </div>
+        <p className="mt-1 font-mulish text-xs text-slate-600 line-clamp-2 sm:line-clamp-1">
+          {person.top_project.tagline}
+        </p>
+      </div>
+
+      {/* Row 3: Full-Width Optional 1-Line Note for this Candidate */}
+      <div className="mt-3.5 pt-3 border-t border-slate-100">
         {!showNoteInput ? (
           <button
             type="button"
@@ -151,7 +148,7 @@ export function ShortlistedCandidateCard({
               value={candidateNote}
               onChange={(e) => onUpdateNote(person.id, e.target.value)}
               placeholder={`e.g. Interested in ${firstName} for our ${TRACK_LABELS[person.track].toLowerCase()} role`}
-              className="w-full px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-xs text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-base sm:text-xs text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white transition-colors"
             />
           </div>
         )}

@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 interface AuthSplitLayoutProps {
-  mode: "login" | "signup";
+  mode: "login" | "signup" | "admin";
   children: React.ReactNode;
 }
 
@@ -39,7 +39,7 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
             />
             <span className="h-4 w-px bg-white/25" aria-hidden="true" />
             <span className="font-cabinet font-semibold text-base tracking-tight text-white/95">
-              Talent Spotlight
+              {mode === "admin" ? "Placement Admin" : "Talent Spotlight"}
             </span>
           </Link>
         </div>
@@ -52,13 +52,17 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
             </span>
 
             <h2 className="mt-3 font-cabinet font-extrabold text-2xl xl:text-3xl text-white tracking-tight leading-[1.18]">
-              {mode === "login"
+              {mode === "admin"
+                ? "Verify cohort work and connect employers with our builders."
+                : mode === "login"
                 ? "Your shipped work and employer introductions, in one place."
                 : "Let the projects you’ve built open the door to your next role."}
             </h2>
 
             <p className="mt-2 font-mulish text-xs xl:text-sm text-slate-200 leading-relaxed">
-              {mode === "login"
+              {mode === "admin"
+                ? "Review pending intern profiles, audit live project links, and forward employer introduction requests to shortlisted talent."
+                : mode === "login"
                 ? "Sign in to review introduction requests from hiring teams, update your availability, or add new work from your cohort."
                 : "Create your profile in under five minutes, showcase up to three real projects, and connect directly with companies hiring from NitHub."}
             </p>
@@ -68,14 +72,18 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
           <div className="pt-4 border-t border-white/15 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-brand-green text-white font-cabinet font-bold text-xs flex items-center justify-center shrink-0">
-                AO
+                {mode === "admin" ? "NH" : "AO"}
               </div>
               <div>
                 <p className="font-cabinet font-bold text-sm text-white">
-                  Adeola Olaniyan
+                  {mode === "admin"
+                    ? "NitHub Placement Office"
+                    : "Adeola Olaniyan"}
                 </p>
                 <p className="font-cabin text-xs text-slate-300">
-                  Fullstack Cohort ’25 · Matched via NitHub Talent
+                  {mode === "admin"
+                    ? "6th Floor, NitHub Building · University of Lagos"
+                    : "Fullstack Cohort ’25 · Matched via NitHub Talent"}
                 </p>
               </div>
             </div>
@@ -116,7 +124,14 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
           </div>
 
           <div className="font-cabin text-xs sm:text-sm text-slate-600">
-            {mode === "login" ? (
+            {mode === "admin" ? (
+              <Link
+                href="/login"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 font-semibold text-navy hover:border-brand-green hover:text-brand-green transition-colors"
+              >
+                Intern Sign in
+              </Link>
+            ) : mode === "login" ? (
               <div className="flex items-center gap-2">
                 <span className="hidden sm:inline text-slate-500">
                   New to NitHub Talent?
@@ -152,7 +167,16 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
         {/* Quiet Bottom Privacy Note */}
         <div className="shrink-0 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-400 font-mulish">
           <p>© 2026 NitHub, University of Lagos.</p>
-          <p>Your personal contact details are never displayed publicly.</p>
+          {mode === "admin" ? (
+            <p>Restricted to confirmed @nithub.unilag.edu.ng staff.</p>
+          ) : (
+            <Link
+              href="/admin/login"
+              className="font-cabin text-slate-400 hover:text-navy transition-colors"
+            >
+              NitHub Admin Sign in →
+            </Link>
+          )}
         </div>
       </div>
     </div>

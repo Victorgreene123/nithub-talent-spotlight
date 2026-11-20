@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const INTERN_MODE_STORAGE_KEY = "nithub_intern_demo_mode";
+const AUTH_ROLE_STORAGE_KEY = "nithub_auth_role";
 
 export function LoginForm() {
   const router = useRouter();
@@ -32,6 +33,7 @@ export function LoginForm() {
 
     setIsLoading(true);
     try {
+      window.sessionStorage.setItem(AUTH_ROLE_STORAGE_KEY, "intern");
       window.sessionStorage.setItem(INTERN_MODE_STORAGE_KEY, "returning");
     } catch {
       // Ignore storage error
@@ -41,6 +43,7 @@ export function LoginForm() {
 
   function handleQuickDemo(mode: "returning" | "new") {
     try {
+      window.sessionStorage.setItem(AUTH_ROLE_STORAGE_KEY, "intern");
       window.sessionStorage.setItem(INTERN_MODE_STORAGE_KEY, mode);
     } catch {
       // Ignore storage error

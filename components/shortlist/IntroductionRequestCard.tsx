@@ -85,7 +85,6 @@ export function IntroductionRequestCard({
     setIsSubmitting(true);
     setErrors({});
 
-    // Build combined notes including any optional per-candidate notes
     const activeCandidateNotes: Record<string, string> = {};
     const perPersonLines: string[] = [];
 
@@ -152,16 +151,19 @@ export function IntroductionRequestCard({
   }
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-visible">
+    <div
+      id="introduction-form"
+      className="scroll-mt-20 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-visible"
+    >
       {/* Deep Navy Top Accent Bar */}
       <div className="h-1.5 w-full bg-navy rounded-t-2xl" />
 
-      <div className="p-6 sm:p-7">
-        <div className="mb-6">
+      <div className="p-5 sm:p-7">
+        <div className="mb-5 sm:mb-6">
           <p className="font-cabin text-xs font-semibold uppercase tracking-wider text-brand-green">
             Introduction Request
           </p>
-          <h2 className="mt-0.5 font-cabinet font-extrabold text-2xl text-navy tracking-tight">
+          <h2 className="mt-0.5 font-cabinet font-extrabold text-xl sm:text-2xl text-navy tracking-tight">
             Your company &amp; role details
           </h2>
           <p className="mt-1 font-mulish text-xs sm:text-sm text-slate-500">
@@ -205,7 +207,7 @@ export function IntroductionRequestCard({
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="e.g. Paystack, Moniepoint, or your startup"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-base sm:text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
             />
             {errors.company_name && (
               <p className="mt-1 text-xs text-red-600 font-mulish">
@@ -229,7 +231,7 @@ export function IntroductionRequestCard({
               value={contactEmail}
               onChange={(e) => setContactEmail(e.target.value)}
               placeholder="you@company.com"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-base sm:text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
             />
             {errors.contact_email && (
               <p className="mt-1 text-xs text-red-600 font-mulish">
@@ -256,7 +258,7 @@ export function IntroductionRequestCard({
               value={contactPhone}
               onChange={(e) => setContactPhone(e.target.value)}
               placeholder="+234 800 000 0000"
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-base sm:text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white disabled:opacity-50 transition-colors"
             />
           </div>
 
@@ -276,7 +278,9 @@ export function IntroductionRequestCard({
                   : "border-slate-200 bg-slate-50 text-navy hover:border-brand-green/50"
               }`}
             >
-              <span className="font-mulish text-sm">{engagementType}</span>
+              <span className="font-mulish text-base sm:text-sm">
+                {engagementType}
+              </span>
               <svg
                 className={`w-4 h-4 text-slate-500 transition-transform ${
                   isDropdownOpen ? "rotate-180 text-brand-green" : ""
@@ -306,7 +310,7 @@ export function IntroductionRequestCard({
                         setEngagementType(option);
                         setIsDropdownOpen(false);
                       }}
-                      className={`w-full px-3 py-2 rounded-lg flex items-center justify-between text-left font-cabin text-xs transition-colors cursor-pointer ${
+                      className={`w-full px-3 py-2.5 rounded-lg flex items-center justify-between text-left font-cabin text-xs transition-colors cursor-pointer ${
                         isSelected
                           ? "bg-brand-green/10 text-brand-green font-semibold"
                           : "text-slate-700 hover:bg-slate-50"
@@ -340,7 +344,7 @@ export function IntroductionRequestCard({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Tell us briefly what your team is building and when you'd like to speak with them."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white resize-none disabled:opacity-50 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 font-mulish text-base sm:text-sm text-navy placeholder:text-slate-400 focus:outline-none focus:border-brand-green focus:bg-white resize-none disabled:opacity-50 transition-colors"
             />
             {errors.notes && (
               <p className="mt-1 text-xs text-red-600 font-mulish">
@@ -353,7 +357,7 @@ export function IntroductionRequestCard({
             <button
               type="submit"
               disabled={isDisabled || isSubmitting}
-              className="w-full py-3 px-5 rounded-xl bg-brand-green text-white font-cabin text-sm font-semibold hover:bg-brand-green/90 disabled:opacity-50 transition-colors cursor-pointer shadow-xs"
+              className="w-full py-3.5 px-5 rounded-xl bg-brand-green text-white font-cabin text-sm font-semibold hover:bg-brand-green/90 disabled:opacity-50 transition-colors cursor-pointer shadow-xs"
             >
               {isSubmitting
                 ? "Sending introduction request..."

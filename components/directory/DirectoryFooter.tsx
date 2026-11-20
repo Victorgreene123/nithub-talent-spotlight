@@ -120,8 +120,11 @@ export function DirectoryFooter({ onOpenShortlist }: DirectoryFooterProps) {
             >
               Contact Placement Team
             </a>
-            <Link href="/admin" className="hover:text-white transition-colors">
-              Admin
+            <Link
+              href="/admin/login"
+              className="hover:text-white transition-colors"
+            >
+              Admin Sign in
             </Link>
           </div>
         </div>

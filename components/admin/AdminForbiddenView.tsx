@@ -32,20 +32,20 @@ export function AdminForbiddenView({
           </p>
 
           <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              href="/admin/login"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-brand-green text-white font-cabin text-xs sm:text-sm font-semibold hover:bg-brand-green/90 transition-colors"
+            >
+              Sign in as Admin →
+            </Link>
+
             <button
               type="button"
               onClick={onRestoreAdmin}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-brand-green text-white font-cabin text-xs sm:text-sm font-semibold hover:bg-brand-green/90 transition-colors cursor-pointer"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-navy font-cabin text-xs sm:text-sm font-semibold hover:border-navy transition-colors cursor-pointer"
             >
-              Switch back to NitHub Admin
+              Preview as NitHub Admin
             </button>
-
-            <Link
-              href="/directory"
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 text-navy font-cabin text-xs sm:text-sm font-semibold hover:border-navy transition-colors"
-            >
-              Go to Directory
-            </Link>
           </div>
         </div>
       </div>

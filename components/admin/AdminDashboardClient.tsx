@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   AdminCandidateProfile,
   AdminHiringRequest,
@@ -21,12 +21,38 @@ type AdminMainTab = "profiles" | "requests";
 type ProfileStatusFilter = "pending" | "approved";
 
 const INTERN_INTROS_STORAGE_KEY = "nithub_intern_intros";
+const AUTH_ROLE_STORAGE_KEY = "nithub_auth_role";
 
 export function AdminDashboardClient() {
   const [isAuthorizedAdmin, setIsAuthorizedAdmin] = useState(true);
   const [mainTab, setMainTab] = useState<AdminMainTab>("profiles");
   const [profileStatusFilter, setProfileStatusFilter] =
     useState<ProfileStatusFilter>("pending");
+
+  useEffect(() => {
+    try {
+      const savedRole = window.sessionStorage.getItem(AUTH_ROLE_STORAGE_KEY);
+      if (savedRole === "intern") {
+        setIsAuthorizedAdmin(false);
+      } else if (savedRole === "admin") {
+        setIsAuthorizedAdmin(true);
+      }
+    } catch {
+      // Ignore storage error
+    }
+  }, []);
+
+  function handleSetRole(isAdmin: boolean) {
+    setIsAuthorizedAdmin(isAdmin);
+    try {
+      window.sessionStorage.setItem(
+        AUTH_ROLE_STORAGE_KEY,
+        isAdmin ? "admin" : "intern"
+      );
+    } catch {
+      // Ignore storage error
+    }
+  }
 
   const [profiles, setProfiles] = useState<AdminCandidateProfile[]>(
     INITIAL_ADMIN_PROFILES
@@ -236,13 +262,11 @@ export function AdminDashboardClient() {
     <div className="min-h-screen flex flex-col bg-slate-50/70 text-navy">
       <AdminNavbar
         isAuthorizedAdmin={isAuthorizedAdmin}
-        onToggleRoleTest={setIsAuthorizedAdmin}
+        onToggleRoleTest={handleSetRole}
       />
 
       {!isAuthorizedAdmin ? (
-        <AdminForbiddenView
-          onRestoreAdmin={() => setIsAuthorizedAdmin(true)}
-        />
+        <AdminForbiddenView onRestoreAdmin={() => handleSetRole(true)} />
       ) : (
         <>
           {/* Admin Header & Main Tabs */}

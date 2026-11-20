@@ -8,6 +8,7 @@ import { Track, TRACK_LABELS } from "@/types/talent";
 
 const INTERN_MODE_STORAGE_KEY = "nithub_intern_demo_mode";
 const INTERN_PROFILE_STORAGE_KEY = "nithub_intern_profile_new";
+const AUTH_ROLE_STORAGE_KEY = "nithub_auth_role";
 
 const ROLE_ORDER: Track[] = [
   "frontend",
@@ -58,6 +59,7 @@ export function SignupForm() {
         email: email.trim(),
         track,
       };
+      window.sessionStorage.setItem(AUTH_ROLE_STORAGE_KEY, "intern");
       window.sessionStorage.setItem(INTERN_MODE_STORAGE_KEY, "new");
       window.sessionStorage.setItem(
         INTERN_PROFILE_STORAGE_KEY,
