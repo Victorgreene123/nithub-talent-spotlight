@@ -12,6 +12,7 @@ import {
   INITIAL_NEW_INTERN,
   INITIAL_RETURNING_INTERN,
 } from "@/lib/mock-talent";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { DirectoryFooter } from "@/components/directory/DirectoryFooter";
 import { InternNavbar } from "./InternNavbar";
 import { DashboardTab, ProfileStatusHeader } from "./ProfileStatusHeader";
@@ -67,6 +68,73 @@ export function InternDashboardClient() {
     } catch {
       // Ignore storage access errors
     }
+
+    // Load authenticated intern's row & projects from Supabase when configured
+    async function loadSupabaseInternProfile() {
+      const supabase = createBrowserSupabaseClient();
+      if (!supabase) return;
+
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (!user) return;
+
+        const [{ data: userRow }, { data: projectRows }] = await Promise.all([
+          supabase.from("users").select("*").eq("id", user.id).maybeSingle(),
+          supabase
+            .from("projects")
+            .select("*")
+            .eq("user_id", user.id)
+            .order("position", { ascending: true }),
+        ]);
+
+        if (userRow) {
+          const projs: TalentProject[] = (projectRows ?? []).map(
+            (p: Record<string, unknown>, idx: number) => ({
+              id: String(p.id),
+              title: String(p.title ?? ""),
+              tagline: String(p.tagline ?? ""),
+              tech_stack: Array.isArray(p.tech_stack)
+                ? (p.tech_stack as string[])
+                : [],
+              live_url: String(p.live_url ?? ""),
+              repo_url: String(p.repo_url ?? ""),
+              thumbnail_url: (p.thumbnail_url as string | null) ?? null,
+              position: (Number(p.position ?? idx + 1) as 1 | 2 | 3) || 1,
+            })
+          );
+
+          const liveProfile: InternAccountProfile = {
+            id: String(userRow.id),
+            full_name: String(userRow.full_name ?? user.email ?? "Intern"),
+            email: String(userRow.email ?? user.email ?? ""),
+            phone: "",
+            avatar_url: (userRow.avatar_url as string | null) ?? null,
+            track: ((userRow.track as string) ||
+              "fullstack") as InternAccountProfile["track"],
+            availability_status: ((userRow.availability_status as string) ||
+              "available_now") as InternAccountProfile["availability_status"],
+            cohort_year: Number(userRow.cohort_year ?? 2025),
+            is_verified: Boolean(userRow.is_verified),
+            consented_at: (userRow.consented_at as string | null) ?? null,
+            bio: String(userRow.bio ?? ""),
+            github_url: (userRow.github_url as string | null) ?? null,
+            linkedin_url: (userRow.linkedin_url as string | null) ?? null,
+            x_url: (userRow.x_url as string | null) ?? null,
+            top_project: projs[0] ?? INITIAL_NEW_INTERN.top_project,
+            projects: projs,
+          };
+
+          setReturningProfile(liveProfile);
+          setNewProfile(liveProfile);
+        }
+      } catch {
+        // Keep local session profile if Supabase query fails
+      }
+    }
+
+    loadSupabaseInternProfile();
   }, []);
 
   const currentProfile =
@@ -118,11 +186,39 @@ export function InternDashboardClient() {
     });
   }
 
-  function handleSaveProfile(updated: Partial<InternAccountProfile>) {
-    updateCurrentProfile({
+  async function handleSaveProfile(updated: Partial<InternAccountProfile>) {
+    const merged = {
       ...currentProfile,
       ...updated,
-    });
+    };
+    updateCurrentProfile(merged);
+
+    const supabase = createBrowserSupabaseClient();
+    if (supabase) {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+        if (user) {
+          await supabase.from("users").upsert({
+            id: user.id,
+            full_name: merged.full_name,
+            email: merged.email || user.email,
+            track: merged.track,
+            bio: merged.bio,
+            cohort_year: merged.cohort_year,
+            availability_status: merged.availability_status,
+            github_url: merged.github_url,
+            linkedin_url: merged.linkedin_url,
+            x_url: merged.x_url,
+            avatar_url: merged.avatar_url,
+            consented_at: merged.consented_at,
+          });
+        }
+      } catch {
+        // Ignore network errors in demo mode
+      }
+    }
   }
 
   function handleSaveProject(

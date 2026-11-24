@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { INITIAL_NEW_INTERN } from "@/lib/mock-talent";
 import { Track, TRACK_LABELS } from "@/types/talent";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 const INTERN_MODE_STORAGE_KEY = "nithub_intern_demo_mode";
 const INTERN_PROFILE_STORAGE_KEY = "nithub_intern_profile_new";
@@ -32,7 +33,7 @@ export function SignupForm() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
 
@@ -53,6 +54,25 @@ export function SignupForm() {
 
     setIsLoading(true);
     try {
+      const supabase = createBrowserSupabaseClient();
+      if (supabase) {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: {
+            data: {
+              full_name: fullName.trim(),
+              track,
+            },
+          },
+        });
+        if (signUpError) {
+          setError(signUpError.message);
+          setIsLoading(false);
+          return;
+        }
+      }
+
       const freshProfile = {
         ...INITIAL_NEW_INTERN,
         full_name: fullName.trim(),

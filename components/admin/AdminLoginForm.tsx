@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 const AUTH_ROLE_STORAGE_KEY = "nithub_auth_role";
 
@@ -23,7 +24,7 @@ export function AdminLoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
 
@@ -48,6 +49,19 @@ export function AdminLoginForm() {
 
     setIsLoading(true);
     try {
+      const supabase = createBrowserSupabaseClient();
+      if (supabase) {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
+        if (signInError) {
+          setError(signInError.message);
+          setIsLoading(false);
+          return;
+        }
+      }
+
       window.sessionStorage.setItem(AUTH_ROLE_STORAGE_KEY, "admin");
     } catch {
       // Ignore storage error

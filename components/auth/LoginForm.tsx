@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 const INTERN_MODE_STORAGE_KEY = "nithub_intern_demo_mode";
 const AUTH_ROLE_STORAGE_KEY = "nithub_auth_role";
@@ -15,7 +16,7 @@ export function LoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
 
@@ -33,6 +34,19 @@ export function LoginForm() {
 
     setIsLoading(true);
     try {
+      const supabase = createBrowserSupabaseClient();
+      if (supabase) {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
+        if (signInError) {
+          setError(signInError.message);
+          setIsLoading(false);
+          return;
+        }
+      }
+
       window.sessionStorage.setItem(AUTH_ROLE_STORAGE_KEY, "intern");
       window.sessionStorage.setItem(INTERN_MODE_STORAGE_KEY, "returning");
     } catch {
