@@ -23,9 +23,10 @@ interface TalentProfileClientProps {
 }
 
 export function TalentProfileClient({
-  profile,
+  profile: initialProfile,
   allTalents,
 }: TalentProfileClientProps) {
+  const [profile, setProfile] = useState<TalentProfile>(initialProfile);
   const [shortlistedIds, setShortlistedIds] = useState<string[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [limitMessage, setLimitMessage] = useState<string | null>(null);
@@ -44,7 +45,27 @@ export function TalentProfileClient({
     } catch {
       // Ignore storage access errors
     }
-  }, []);
+
+    async function loadLiveProfile() {
+      try {
+        const res = await fetch(`/api/talent/${initialProfile.id}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data?.id && Array.isArray(data?.projects)) {
+            setProfile((prev) => ({
+              ...prev,
+              ...data,
+              top_project: data.projects[0] ?? prev.top_project,
+            }));
+          }
+        }
+      } catch {
+        // Keep initial profile data when offline
+      }
+    }
+
+    loadLiveProfile();
+  }, [initialProfile.id]);
 
   function saveShortlist(nextIds: string[]) {
     setShortlistedIds(nextIds);
@@ -161,7 +182,7 @@ export function TalentProfileClient({
               </div>
 
               <Link
-                href="/directory"
+                href="/"
                 className="font-cabin text-sm font-semibold text-brand-green hover:underline underline-offset-4"
               >
                 View all in directory →

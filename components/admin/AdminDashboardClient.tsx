@@ -40,6 +40,90 @@ export function AdminDashboardClient() {
     } catch {
       // Ignore storage error
     }
+
+    async function loadLiveAdminData() {
+      try {
+        const [profilesRes, requestsRes] = await Promise.all([
+          fetch("/api/admin/profiles"),
+          fetch("/api/admin/hiring-requests?page=1&page_size=50"),
+        ]);
+
+        if (profilesRes.status === 403) {
+          setIsAuthorizedAdmin(false);
+          return;
+        }
+
+        if (profilesRes.ok) {
+          const json = await profilesRes.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            const mapped: AdminCandidateProfile[] = json.data.map(
+              (u: Record<string, unknown>, idx: number) => {
+                const projs = Array.isArray(u.projects) ? u.projects : [];
+                return {
+                  id: String(u.id),
+                  full_name: String(u.full_name ?? "Intern"),
+                  email: String(u.email ?? ""),
+                  phone: "",
+                  avatar_url: (u.avatar_url as string | null) ?? null,
+                  track: ((u.track as string) || "fullstack") as AdminCandidateProfile["track"],
+                  availability_status: ((u.availability_status as string) ||
+                    "available_now") as AdminCandidateProfile["availability_status"],
+                  cohort_year: Number(u.cohort_year ?? 2025),
+                  is_verified: Boolean(u.is_verified),
+                  consented_at: (u.consented_at as string | null) ?? null,
+                  bio: String(u.bio ?? ""),
+                  github_url: (u.github_url as string | null) ?? null,
+                  linkedin_url: (u.linkedin_url as string | null) ?? null,
+                  x_url: (u.x_url as string | null) ?? null,
+                  top_project: projs[0] ?? INITIAL_ADMIN_PROFILES[0].top_project,
+                  projects: projs,
+                  submitted_at_label: u.created_at
+                    ? `Submitted ${new Date(String(u.created_at)).toLocaleDateString()}`
+                    : "Submitted recently",
+                  submitted_order: idx + 1,
+                };
+              }
+            );
+            setProfiles(mapped);
+          }
+        }
+
+        if (requestsRes.ok) {
+          const json = await requestsRes.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            const mappedReqs: AdminHiringRequest[] = json.data.map(
+              (r: Record<string, unknown>, idx: number) => {
+                const ids = Array.isArray(r.shortlisted_user_ids)
+                  ? (r.shortlisted_user_ids as string[])
+                  : [];
+                return {
+                  id: String(r.id),
+                  company_name: String(r.company_name ?? ""),
+                  contact_email: String(r.contact_email ?? ""),
+                  contact_phone: (r.contact_phone as string | undefined) ?? undefined,
+                  engagement_type: String(r.engagement_type ?? "Full-time role"),
+                  notes: String(r.notes ?? ""),
+                  created_at_label: r.created_at
+                    ? new Date(String(r.created_at)).toLocaleDateString()
+                    : "Recently",
+                  created_order: 100 - idx,
+                  notified_at: (r.notified_at as string | null) ?? null,
+                  candidates: ids.map((internId) => ({
+                    intern_id: internId,
+                    forward_status: "not_sent" as const,
+                  })),
+                };
+              }
+            );
+            setRequests(mappedReqs);
+          }
+        }
+      } catch {
+        // Keep initial seed data when offline or before Supabase is configured
+      }
+    }
+
+    loadLiveAdminData();
   }, []);
 
   function handleSetRole(isAdmin: boolean) {
@@ -100,7 +184,7 @@ export function AdminDashboardClient() {
     return requests.find((r) => r.id === activeRequestId) ?? null;
   }, [activeRequestId, requests]);
 
-  function handleToggleApprove(id: string, nextVerified: boolean) {
+  async function handleToggleApprove(id: string, nextVerified: boolean) {
     const target = profilesMap[id];
     setProfiles((prev) =>
       prev.map((p) =>
@@ -115,6 +199,16 @@ export function AdminDashboardClient() {
           : p
       )
     );
+
+    try {
+      await fetch(`/api/admin/profiles/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ is_verified: nextVerified }),
+      });
+    } catch {
+      // Ignore network errors in local demo mode
+    }
 
     if (target) {
       showNotice(

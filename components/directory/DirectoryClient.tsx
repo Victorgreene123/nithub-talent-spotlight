@@ -65,6 +65,8 @@ export function DirectoryClient({
   }, [searchParams]);
 
   // Shortlist state persisted in sessionStorage
+  const [talents, setTalents] = useState<TalentDirectoryItem[]>(initialTalents);
+  const [stackTags, setStackTags] = useState<string[]>(availableStackTags);
   const [shortlistedIds, setShortlistedIds] = useState<string[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [limitMessage, setLimitMessage] = useState<string | null>(null);
@@ -81,6 +83,34 @@ export function DirectoryClient({
     } catch {
       // Ignore storage access errors
     }
+
+    // Fetch live talent and stack filters from API endpoints (falls back to seed data if empty/offline)
+    async function loadLiveDirectory() {
+      try {
+        const [talentRes, stackRes] = await Promise.all([
+          fetch("/api/talent?page=1&page_size=50"),
+          fetch("/api/filters/stack"),
+        ]);
+
+        if (talentRes.ok) {
+          const json = await talentRes.json();
+          if (Array.isArray(json?.data) && json.data.length > 0) {
+            setTalents(json.data);
+          }
+        }
+
+        if (stackRes.ok) {
+          const json = await stackRes.json();
+          if (Array.isArray(json?.stacks) && json.stacks.length > 0) {
+            setStackTags(json.stacks);
+          }
+        }
+      } catch {
+        // Keep initial seed data when offline or before Supabase is configured
+      }
+    }
+
+    loadLiveDirectory();
   }, []);
 
   function saveShortlist(nextIds: string[]) {
@@ -141,8 +171,8 @@ export function DirectoryClient({
 
   // Filter logic: Within one filter category = OR; across categories = AND
   const filteredTalents = useMemo(() => {
-    return initialTalents.filter((person) => {
-      if (!person.is_verified) return false;
+    return talents.filter((person) => {
+      if (!person.is_verified || !person.top_project) return false;
 
       const roleMatches =
         selectedRoles.length === 0 || selectedRoles.includes(person.track);
@@ -163,7 +193,7 @@ export function DirectoryClient({
       return roleMatches && availabilityMatches && stackMatches;
     });
   }, [
-    initialTalents,
+    talents,
     selectedRoles,
     selectedAvailabilities,
     selectedStacks,
@@ -171,9 +201,9 @@ export function DirectoryClient({
 
   const shortlistedPeople = useMemo(() => {
     return shortlistedIds
-      .map((id) => initialTalents.find((t) => t.id === id))
+      .map((id) => talents.find((t) => t.id === id))
       .filter((t): t is TalentDirectoryItem => Boolean(t));
-  }, [shortlistedIds, initialTalents]);
+  }, [shortlistedIds, talents]);
 
   function handleToggleShortlist(talent: TalentDirectoryItem) {
     setLimitMessage(null);
@@ -215,7 +245,7 @@ export function DirectoryClient({
           selectedRoles={selectedRoles}
           selectedStacks={selectedStacks}
           selectedAvailabilities={selectedAvailabilities}
-          availableStackTags={availableStackTags}
+          availableStackTags={stackTags}
           totalResults={filteredTalents.length}
           onApplyFilters={updateUrlParams}
           onToggleRole={handleToggleRole}
