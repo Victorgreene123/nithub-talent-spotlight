@@ -14,7 +14,7 @@ export function DirectoryFooter({ onOpenShortlist }: DirectoryFooterProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start pb-10 border-b border-white/10">
           {/* Left: NitHub Identity (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <Link href="/directory" className="inline-block">
+            <Link href="/" className="inline-block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nithub-logo.png"

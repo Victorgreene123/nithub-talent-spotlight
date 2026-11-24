@@ -16,7 +16,7 @@ export function DirectoryNavbar({ shortlistCount }: DirectoryNavbarProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-15 sm:h-16 flex items-center justify-between gap-2">
         {/* Left: Brand Logo */}
         <Link
-          href="/directory"
+          href="/"
           className="flex items-center gap-2 sm:gap-2.5 min-w-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -100,7 +100,7 @@ export function DirectoryNavbar({ shortlistCount }: DirectoryNavbarProps) {
       {isMobileMenuOpen && (
         <div className="sm:hidden bg-navy border-t border-white/10 px-4 pt-3 pb-4 space-y-2 font-cabin text-sm">
           <Link
-            href="/directory"
+            href="/"
             onClick={() => setIsMobileMenuOpen(false)}
             className="block px-3 py-2.5 rounded-lg text-white hover:bg-white/10 font-medium"
           >

@@ -6,7 +6,7 @@ export function ShortlistHeader() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-4 sm:mb-6">
           <Link
-            href="/directory"
+            href="/"
             className="inline-flex items-center gap-2 font-cabin text-xs sm:text-sm font-medium text-slate-500 hover:text-brand-green transition-colors"
           >
             <span aria-hidden="true">←</span>

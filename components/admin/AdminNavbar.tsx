@@ -14,7 +14,7 @@ export function AdminNavbar({
   return (
     <header className="sticky top-0 z-30 bg-navy text-white border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-15 sm:h-16 flex items-center justify-between gap-2">
-        <Link href="/directory" className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+        <Link href="/" className="flex items-center gap-2 sm:gap-2.5 min-w-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/nithub-logo.png"
@@ -57,7 +57,7 @@ export function AdminNavbar({
           </div>
 
           <Link
-            href="/directory"
+            href="/"
             className="text-slate-300 hover:text-white transition-colors"
           >
             Directory ↗

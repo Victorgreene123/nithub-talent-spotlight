@@ -271,7 +271,7 @@ export function ShortlistClient({ allTalents }: ShortlistClientProps) {
               {/* Bottom Actions */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <Link
-                  href="/directory"
+                  href="/"
                   className="w-full sm:w-auto px-6 py-3 rounded-xl bg-brand-green text-white font-cabin text-sm font-semibold text-center hover:bg-brand-green/90 transition-colors shadow-xs"
                 >
                   Browse more talent in directory
@@ -358,7 +358,7 @@ export function ShortlistClient({ allTalents }: ShortlistClientProps) {
                   </p>
                   <div className="pt-2">
                     <Link
-                      href="/directory"
+                      href="/"
                       className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-green text-white font-cabin text-sm font-semibold hover:bg-brand-green/90 transition-colors"
                     >
                       Browse Talent Directory
@@ -379,7 +379,7 @@ export function ShortlistClient({ allTalents }: ShortlistClientProps) {
 
                   {spotsRemaining > 0 && (
                     <Link
-                      href="/directory"
+                      href="/"
                       className="block rounded-2xl border-2 border-dashed border-slate-300 hover:border-brand-green bg-white/50 hover:bg-brand-green/5 p-3.5 sm:p-4 text-center transition-colors"
                     >
                       <span className="font-cabin text-xs sm:text-sm font-semibold text-brand-green">

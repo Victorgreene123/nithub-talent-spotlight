@@ -38,7 +38,7 @@ export function TalentProfileHeader({
         {/* Back Breadcrumb */}
         <div className="mb-8">
           <Link
-            href="/directory"
+            href="/"
             className="inline-flex items-center gap-2 font-cabin text-sm font-medium text-slate-500 hover:text-brand-green transition-colors"
           >
             <span aria-hidden="true">←</span>

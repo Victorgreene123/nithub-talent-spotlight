@@ -28,7 +28,7 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
 
         {/* Top: Official NitHub Logo */}
         <div className="relative z-10 flex items-center justify-between">
-          <Link href="/directory" className="inline-flex items-center gap-3">
+          <Link href="/" className="inline-flex items-center gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/nithub-logo.png"
@@ -102,7 +102,7 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
           <div className="flex items-center gap-3">
             {/* Mobile Logo */}
             <Link
-              href="/directory"
+              href="/"
               className="lg:hidden inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -116,7 +116,7 @@ export function AuthSplitLayout({ mode, children }: AuthSplitLayoutProps) {
             </Link>
 
             <Link
-              href="/directory"
+              href="/"
               className="font-cabin text-xs sm:text-sm font-semibold text-slate-500 hover:text-brand-green transition-colors"
             >
               ← Back to Talent Directory

@@ -16,7 +16,7 @@ export default function TalentNotFound() {
         </p>
         <div className="mt-6">
           <Link
-            href="/directory"
+            href="/"
             className="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-brand-green text-white font-cabin text-sm font-semibold hover:bg-brand-green/90 transition-colors"
           >
             Back to Talent Directory
