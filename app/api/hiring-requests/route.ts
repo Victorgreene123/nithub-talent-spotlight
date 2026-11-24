@@ -68,9 +68,14 @@ export async function POST(req: NextRequest) {
       return apiError(400, 'VALIDATION_ERROR', 'Invalid JSON request body');
     }
 
-    // Honeypot check: if a bot fills a hidden field (e.g. `website` or `company_website`),
+    // Honeypot check: if a bot fills a hidden field (e.g. `website`, `website_url`, or `company_website`),
     // silently discard without touching the database or sending email.
-    const honeypot = typeof body.website === 'string' ? body.website.trim() : '';
+    const honeypot =
+      typeof body.website === 'string'
+        ? body.website.trim()
+        : typeof body.website_url === 'string'
+        ? body.website_url.trim()
+        : '';
     if (honeypot.length > 0) {
       return NextResponse.json(
         { id: '00000000-0000-0000-0000-000000000000' },

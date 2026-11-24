@@ -2,7 +2,16 @@ import { NextRequest, NextResponse } from 'next/server';
 import { apiError } from '@/lib/api-response';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 
-const VALID_TRACKS = new Set(['frontend', 'backend', 'fullstack', 'uiux', 'aiml', 'mobile']);
+const VALID_TRACKS = new Set([
+  'frontend',
+  'backend',
+  'fullstack',
+  'uiux',
+  'aiml',
+  'mobile',
+  'hardware',
+  'pm',
+]);
 const VALID_AVAILABILITY = new Set(['available_now', 'open_to_gigs', 'in_cohort']);
 
 type PublicTalentRow = {
